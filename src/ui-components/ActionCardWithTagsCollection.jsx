@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import React from "react";
-import { Products, Tags } from "../models";
+import { Comments, Products, Tags } from "../models";
 import {
   getOverrideProps,
   useDataStoreBinding,
@@ -19,12 +19,17 @@ export default function ActionCardWithTagsCollection(props) {
     type: "collection",
     model: Tags,
   }).items;
+  const commentsItems = useDataStoreBinding({
+    type: "collection",
+    model: Comments,
+  }).items;
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Products,
   }).items.map((item) => ({
     ...item,
     Tags: tagsItems.filter((model) => model.products === item.id),
+    Comments: commentsItems.filter((model) => model.productsID === item.id),
   }));
   const items = itemsProp !== undefined ? itemsProp : itemsDataStore;
   return (

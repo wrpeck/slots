@@ -1,3 +1,10 @@
+type Comments @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  author: String
+  content: String
+  productsID: ID! @index(name: "byProducts")
+}
+
 type Tags @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
@@ -10,4 +17,6 @@ type Products @model @auth(rules: [{allow: public}]) {
   description: String
   image: AWSURL
   Tags: [Tags] @manyToMany(relationName: "ProductsTags")
+  Comments: [Comments] @hasMany(indexName: "byProducts", fields: ["id"])
 }
+ 
