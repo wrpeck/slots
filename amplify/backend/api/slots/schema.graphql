@@ -1,0 +1,13 @@
+type Tags @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  productss: [Products] @manyToMany(relationName: "ProductsTags")
+}
+
+type Products @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  description: String
+  image: AWSURL
+  Tags: [Tags] @manyToMany(relationName: "ProductsTags")
+}
