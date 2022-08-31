@@ -10,7 +10,7 @@ function App() {
           overrides: {
             "Button" : {
               onClick: () => {
-                console.log(item)
+                console.log(item.Tags)
               }
             },
           },
